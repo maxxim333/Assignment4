@@ -1,5 +1,7 @@
 =begin
 
+Disclaimer: In this work I colaborated with Carolina Jiang (https://github.com/carol13jz)
+
 I did not try to run this script using the ENTIRE genome of Arabidopsis because it was simply too large for my PC and I would have
 to run it for more than overnight. But I tested it with a subset of the genome large enough to find a couple of orthologues. In principle
 it should run smoothly for the rest of genome. If it doesnt, please let me know. I would like to have a chance to try to fix it.
@@ -24,6 +26,11 @@ at = File.open('TAIR10_seq_20110103_representative_gene_model_updated', "r")
 pombae = File.open('pep.fa', "r")
 
 # Using Bio Blast and creating local factory of alignments.
+
+#This is how its gonna work:
+# blastx searches protein databases using a translated nucleotide query, so we use it for protein sequence factory
+# BLASTN programs search nucleotide databases using a nucleotide query, so we use it for nucleotide fasta factory
+
 prot_factory = Bio::Blast.local('blastx', './prot_db')
 nt_factory = Bio::Blast.local('tblastn','./nt_db')
 
